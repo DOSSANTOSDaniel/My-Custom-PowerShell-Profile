@@ -3,6 +3,8 @@
 Profil PowerShell personnalisé avec fonctions utilitaires, outils système et améliorations du terminal.
 
 ![Animation](Readme_medias/Animation.gif)
+---
+![capture d'ecran](Readme_medias/capture.png)
 
 Ce dépôt contient mon profil PowerShell personnalisé (`$PROFILE` – `Microsoft.PowerShell_profile.ps1`) ainsi qu’un ensemble d’outils, fonctions et alias conçus pour améliorer :
 
