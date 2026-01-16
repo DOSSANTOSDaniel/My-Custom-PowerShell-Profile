@@ -17,7 +17,8 @@ $AllApps = @(
     "upterm",
     "miniserve",
     "rustdesk",
-    "gdu"
+    "gdu",
+    "nmap"
 )
 
 foreach ($AppName in $AllApps) {
@@ -87,5 +88,6 @@ foreach ($ServiceName in $AllServices) {
         }
     }
 }
+
 
 Write-Host "Fin du script d'installation et configuration des dépendances !" -ForegroundColor Green
