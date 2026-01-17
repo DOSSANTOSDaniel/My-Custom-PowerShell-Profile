@@ -9,7 +9,7 @@ if ($PSScriptRoot) {
     $ProfileRoot = Split-Path -Parent $PSScriptRoot
 }
 else {
-    $ProfileRoot = $PROFILE
+    $ProfileRoot = Split-Path -Parent $PROFILE
 }
 
 # Chargement des modules
@@ -176,4 +176,5 @@ if ($local -and $remote -and $local -ne $remote) {
 else {
     Write-Host "🔄 Pas de mise à jour !"
     Log_msg "Pas de mise à jour !."
+
 }
