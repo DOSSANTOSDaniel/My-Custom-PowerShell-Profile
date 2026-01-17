@@ -9,6 +9,9 @@ $Host.UI.RawUI.WindowTitle = "PS>_ $env:COMPUTERNAME"
 # Variables globales
 $ProfileRoot = Split-Path -Parent $PROFILE
 
+# Fichier de log pour la synchronisation avec git
+$LogFile = Join-Path $ProfileRoot "updater.log"
+
 # Si le profil n'existe pas, on arrête tout
 if (-not (Test-Path $ProfileRoot)) { return }
 
@@ -217,4 +220,5 @@ function FX-ScanBarLight {
     }
 }
 # Affichage de la bannière
+
 Show-Banner
