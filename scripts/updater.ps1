@@ -105,8 +105,11 @@ try {
     Log_msg "Local HEAD: $local"
     Log_msg "Remote HEAD: $remote" 
 
+
+
     if ($local -ne $remote) {
         Write-Host "🔄 Mise à jour du profile..."
+        # Ecrase si fichiers en local
         git reset --hard origin/main | Out-Null
     }
     else {
@@ -137,13 +140,8 @@ if ($local -and $remote -and $local -ne $remote) {
         Write-Host "`n---- Dernières entrées du journal de mise à jour ----" -ForegroundColor Cyan
         Get-Content $LogFile -Tail 20
         Pause
-        . $PROFILE
-    }
-    else {
-        # Kill tous les Windows Terminal
         Get-Process "WindowsTerminal" -ErrorAction SilentlyContinue | Stop-Process -Force
         Log_msg "Tuer toutes les instances de Windows Terminal."
-        Log_msg "[$(Get-Date)] Profile updated"
 
         # Petite pause pour s'assurer que tous les processus sont fermés
         Start-Sleep -Milliseconds 500
@@ -151,16 +149,43 @@ if ($local -and $remote -and $local -ne $remote) {
         # Ouvrir une nouvelle fenêtre WT et recharger le profil
         $commands = @(
             '. $PROFILE'
-            'Write-Host " "'
-            'Write-Host "-- Journal de mise à jour --"'
-            'Write-Host " "'
-            'Get-Content $LogFile -Tail 20'
         )
 
         $fullCommand = $commands -join "`n"
 
-        Write-Host "Une mise à jour est nécessaire !"
-        pause
+        Start-Process wt.exe `
+            -Verb RunAs `
+            -PassThru `
+            -ErrorAction Stop `
+            -ArgumentList @(
+            'new-tab'
+            '--focus'
+            'pwsh'
+            '-NoLogo'
+            '-NoExit'
+            '-Interactive'
+            '-ExecutionPolicy', 'Bypass'
+            '-Command', $fullCommand
+        )
+    }
+    else {
+        # Kill tous les Windows Terminal
+        Write-Host "`n---- Dernières entrées du journal de mise à jour ----" -ForegroundColor Cyan
+        Log_msg "[$(Get-Date)] Profile updated"
+        Get-Content $LogFile -Tail 20
+        Pause
+        Log_msg "Tuer toutes les instances de Windows Terminal."
+        Get-Process "WindowsTerminal" -ErrorAction SilentlyContinue | Stop-Process -Force
+
+        # Petite pause pour s'assurer que tous les processus sont fermés
+        Start-Sleep -Milliseconds 500
+
+        # Ouvrir une nouvelle fenêtre WT et recharger le profil
+        $commands = @(
+            '. $PROFILE'
+        )
+
+        $fullCommand = $commands -join "`n"
 
         Start-Process wt.exe `
             -Verb RunAs `
@@ -183,5 +208,3 @@ else {
     Log_msg "Pas de mise à jour !."
 
 }
-
-
