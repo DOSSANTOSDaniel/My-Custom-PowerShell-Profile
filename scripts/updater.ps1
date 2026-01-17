@@ -151,11 +151,16 @@ if ($local -and $remote -and $local -ne $remote) {
         # Ouvrir une nouvelle fenêtre WT et recharger le profil
         $commands = @(
             '. $PROFILE'
-            '& { Write-Host "`n-- Journal de mise à jour --" -ForegroundColor Cyan }'
+            'Write-Host " "'
+            'Write-Host "-- Journal de mise à jour --"'
+            'Write-Host " "'
             'Get-Content $LogFile -Tail 20'
         )
 
         $fullCommand = $commands -join "`n"
+
+        Write-Host "Une mise à jour est nécessaire !"
+        pause
 
         Start-Process wt.exe `
             -Verb RunAs `
