@@ -151,7 +151,7 @@ if ($local -and $remote -and $local -ne $remote) {
         # Ouvrir une nouvelle fenêtre WT et recharger le profil
         $commands = @(
             '. $PROFILE'
-            'Write-Host `"`n-- Journal de mise à jour --`" -ForegroundColor Cyan'
+            'Write-Host "`n -- Journal de mise à jour -- " -ForegroundColor Cyan'
             'Get-Content $LogFile -Tail 20'
         )
 
@@ -178,3 +178,4 @@ else {
     Log_msg "Pas de mise à jour !."
 
 }
+
