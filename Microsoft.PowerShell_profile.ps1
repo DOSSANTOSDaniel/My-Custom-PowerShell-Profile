@@ -54,7 +54,7 @@ $IsAdmin = ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIden
 $IsUpterm = $env:UPTERM_ADMIN_SOCKET
 
 # Sélection aléatoire parmi une liste d'icônes
-$allIconsPrompts = @('💎'; '🥊'; '💾'; '🍄'; '🍌'; '🔥'; '🪐'; '🏴‍☠️'; '👽'; '👻'; '💩'; '🐧'; '🎃'; '💊'; '🍬'; '🍭'; '🥝'; '🍍'; '🍓'; '🥜'; '🌵'; '🍀'; '🍁'; '🚀'; '🎈')
+$allIconsPrompts = @('💎'; '🥊'; '💾'; '🍄'; '🍌'; '🔥'; '🪐'; '🏴‍☠️'; '👽'; '👻'; '💩'; '🐧'; '🎃'; '💊'; '🍬'; '🍭'; '🥝'; '🍍'; '🍓'; '🥜'; '🌵'; '🍀'; '🍁'; '🚀'; '🎈'; '⚽')
 $IconPromptUser = $allIconsPrompts[(Get-Random -min 0 -max ($allIconsPrompts.Length))]
 # Icône SSH
 $IconPromptSSH = "📡"
@@ -222,6 +222,7 @@ function FX-ScanBarLight {
 # Affichage de la bannière
 
 Show-Banner
+
 
 
 
